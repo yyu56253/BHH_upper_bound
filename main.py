@@ -12,7 +12,7 @@ from time import time
 from helper import leaf_contribution
 h = 3
 seed = 0
-n_sample = 1000000
+n_sample = 1000
 
 def generate_data(seed):
     # Randomly sample 10-dimensional vectors
@@ -127,19 +127,17 @@ if __name__ == '__main__':
     start_tree = time()
     leaf_nodes = Manager().list()
     tree = Tree()
-    tree.create_decision_tree(data, leaf_nodes)
+    tree.create_decision_tree(data, leaf_nodes) # Comment this line and uncomment the two lines below to save tree
+    #with open('tree_' + str(n_sample), 'wb') as file:
+    #    pickle.dump(tree.create_decision_tree(data, leaf_nodes), file)
     end_tree = time()
     with concurrent.futures.ProcessPoolExecutor() as executor:
         results = list(executor.map(worker, leaf_nodes))
     parsed_results = []
     for result in results:
-        if '|' in result:
-            lower, upper = result.split('|')
-            parsed_results.append(iv.mpf((lower, upper)))
-        else:
-            parsed_results.append(iv.mpf(result))
-    total_saving = sum(parsed_results, iv.mpf(0))
+        parsed_results.append(iv.mpf(result))
+    total_improvement = sum(parsed_results)
     end_node = time()
     print(f"Time to build tree (sec): {end_tree - start_tree:.2f}")
-    print(f"Time to calculate saving (sec): {end_node - end_tree:.2f}")
-    print(f"Total saving in interval arithmetic: {total_saving}")
+    print(f"Time to calculate improvement (sec): {end_node - end_tree:.2f}")
+    print(f"Total upper bound improvement as interval arithmetic: {total_improvement}")
