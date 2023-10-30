@@ -8,13 +8,13 @@ Consider a path *(X<sub>0</sub>,Y<sub>0</sub>),...,(X<sub>k</sub>,Y<sub>k</sub>)
 
 | Figure 1: How zigzags could contribute to the upper bound of TSP |
 | -------- |
-| ![](images/zigzag) |
+| ![](images/zigzag.png) |
 
 The central idea to our improved upper bound is the replacement of the horizontal traversal strategy with a more general sequence. Specifically, we consider the same set of strips of height *h/√n*, but we now consider ordered (*k+1*)-tuples *(X<sub>i</sub>,Y<sub>i</sub>),...,(X<sub>i+k</sub>,Y<sub>i+k</sub>)* for fixed (small) *k*, and select the permutation that minimizes the total path length of those *k+1* points, as shown in Figure 2. Note that it is necessary to restrict ourselves to those permutations that begin with the leftmost endpoint *(X<sub>i</sub>, Y<sub>i</sub>)* and end with the rightmost endpoint *(X<sub>i+k</sub>,Y<sub>i+k</sub>)*, because we have to stitch all of the paths together to form a single path. The original bound simply corresponds to the case where *k = 1* (or *k = 2*, since the endpoints are fixed).
 
 | Figure 2: Six possible permutations when *k = 4* |
 | -------- |
-| ![](images/six_permutation) |
+| ![](images/six_permutation.png) |
 
 ### Construction of decision tree
 
@@ -30,25 +30,25 @@ To load an example decision tree, run the command:
 
 | Figure 3: Illustration of a hyperrectangle in the 5-point / 6-permutation scenario |
 | -------- |
-| ![](images/box_selection) |
+| ![](images/box_selection.png) |
 
 Figure 3 displays an instance of a 9-dimensional hyperrectangular box *B ⊂ D = {(x<sub>1</sub>, ..., x<sub>k</sub>, u<sub>0</sub>, ..., u<sub>k</sub>): 0 = x<sub>0</sub> ≤ x<sub>1</sub> ≤ ... ≤ x<sub>k</sub>, 0 ≤ u<sub>i</sub> ≤ 1}*, portrayed on the coordinate plane as a line segment and four rectangular regions.
 
 | Figure 4: Theoretical improvement limit under different selections of *h* and *k* |
 | -------- |
-| ![](images/theoretical_improvement) |
+| ![](images/theoretical_improvement.png) |
 
 Figure 4 illustrates how larger *k* could potentially lead to further improvements of the upper bound. As *k* increases, we had better select larger *h*.
 
 | Figure 5: New upper bounds as *h* changes, for *k = 4 and N = 10<sup>7</sup>* |
 | -------- |
-| ![](images/upperbound_vs_h2) |
+| ![](images/upperbound_vs_h2.png) |
 
 Figure 5 shows how the selection of *h* would affect *β<sub>2</sub>*. Under our current scheme of selecting hyperrectangular box *B*, *h = √3* gives us the best upper bound when *k = 4*.
 
 | Figure 6: Further improvement of the upper bound as *n_sample* grows |
 | -------- |
-| ![](images/upperbound_vs_N) |
+| ![](images/upperbound_vs_N.png) |
 
 Figure 6 shows how the upper bound of *β<sub>2</sub>* improves as the training dataset size increases. The computation time also grows linearly.
 
