@@ -3,8 +3,8 @@ import numpy as np
 from mpmath import iv
 import warnings
 warnings.filterwarnings("ignore", category = RuntimeWarning)
-h = 3
-numer_part = 1000
+h = 3.25
+numer_part = 100
 
 # FriCAS Setup
 def Fu_4(x_1,x_2,y_2):
@@ -163,13 +163,13 @@ def contribution(box, label):
         return max(0, (default - new).real)
 
 def check_monotone(box_array):
-    if (box_array[0][0] < box_array[0][1] <= box_array[1][0] < box_array[1][1] <= box_array[2][0] < box_array[2][1] <= box_array[3][0] < box_array[3][1] <= box_array[4][0] < box_array[4][1]):
+    if (0 <= box_array[0][0] < box_array[0][1] <= box_array[1][0] < box_array[1][1] <= box_array[2][0] < box_array[2][1] <= box_array[3][0] < box_array[3][1] <= box_array[4][0] < box_array[4][1]):
         return True
     else:
         return False
 
 # Decision Tree
-def special_box(box_array):
+def necessary_condition(box_array):
     if box_array[0][0] > box_array[3][0] > 0:
         box_array[1][0], box_array[2][0], box_array[3][0] = max(box_array[1][0], box_array[0][0]), max(box_array[2][0], box_array[0][0]), box_array[0][0]
     elif box_array[0][0] > box_array[2][0] > 0:
@@ -206,21 +206,7 @@ def special_box(box_array):
         box_array[0][1] = box_array[1][1]
     return box_array
 
-def leaf2box(leaf):
-    ancestor = leaf.ancestor
-    feat_dict = {'x0':0,'x1':1,'x2':2,'x3':3,'x4':4,'y0':5,'y1':6,'y2':7,'y3':8,'y4':9}
-    box_array = np.zeros((10, 2))
-    for i in range(5, 10):
-        box_array[i][1] = 1
-    for const in ancestor:
-        if const[2] == 'L':
-            cur = box_array[feat_dict[const[0]]][1]
-            box_array[feat_dict[const[0]]][1] = const[1] if cur == 0 else min(cur, const[1])
-        elif const[2] == 'R':
-            cur = box_array[feat_dict[const[0]]][0]
-            box_array[feat_dict[const[0]]][0] = const[1] if cur == 0 else max(cur, const[1])
-    # Special cases
-    box_array = special_box(box_array)
+def prune(box_array):
     for i in range(4):
         if (box_array[i+1][0] == 0):
             if (box_array[i][1] == 0):
@@ -257,6 +243,24 @@ def leaf2box(leaf):
                 box_array[i+1][0] = box_array[i][1]
             elif (inner_avg >= box_array[i+1][1]) or (outer_avg < box_array[i+1][0]):
                 box_array[i][1] = box_array[i+1][0]
+    return box_array
+
+def leaf2box(leaf):
+    ancestor = leaf.ancestor
+    box_array = np.zeros((10, 2))
+    for i in range(5, 10):
+        box_array[i][1] = 1
+    for const in ancestor:
+        if const[2] == 'L':
+            cur = box_array[const[0]][1]
+            box_array[const[0]][1] = const[1] if cur == 0 else min(cur, const[1])
+        elif const[2] == 'R':
+            cur = box_array[const[0]][0]
+            box_array[const[0]][0] = const[1] if cur == 0 else max(cur, const[1])
+    # Necessary conditions
+    box_array = necessary_condition(box_array)
+    # Prune the box to ensure validity
+    box_array = prune(box_array)
     return box_array
 
 def leaf_contribution(leaf):
