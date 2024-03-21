@@ -40,17 +40,13 @@ Figure 3 displays an instance of a 9-dimensional hyperrectangular box *B ⊂ D =
 
 Figure 4 illustrates how larger *k* could potentially lead to further improvements of the upper bound. As *k* increases, we had better select larger *h*.
 
-| Figure 5: New upper bounds as *h* changes, for *k = 4 and N = 10<sup>7</sup>* |
+| Figure 5: Setting *k = 4*, new upper bounds for multiple selections of *h*, as *N* increases |
 | -------- |
-| ![](images/upperbound_vs_h2.png) |
+| ![](images/comp_result.png) |
 
-Figure 5 shows how the selection of *h* would affect *β<sub>2</sub>*. Under our current scheme of selecting hyperrectangular box *B*, *h = √3* gives us the best upper bound when *k = 4*.
+Figure 5 shows how the guaranteed upper bound of *β<sub>2</sub>* improves as the training dataset size *N* increases. The computation time grows linearly.
 
-| Figure 6: Further improvement of the upper bound as *n_sample* grows |
-| -------- |
-| ![](images/upperbound_vs_N.png) |
-
-Figure 6 shows how the upper bound of *β<sub>2</sub>* improves as the training dataset size increases. The computation time also grows linearly.
+The selection of *h* would also affect *β<sub>2</sub>*. Under our current computational limit, *h = √3.25* gives us a better upper bound than *h = √3, √3.5*.
 
 ### List of Functions in *helper.py*
 
