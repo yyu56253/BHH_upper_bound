@@ -1,6 +1,7 @@
 # A New Upper Bound for the Euclidean TSP Constant
 
 **Authors**: Julien Yu, John Carlsson
+
 **Contact**: yyu56253@usc.edu, jcarlsso@usc.edu
 
 ## Description
@@ -20,7 +21,7 @@ Install the dependencies using the provided `requirements.txt` file:
 pip install -r requirements.txt
 ```
 
-### Overview: permutations and zigzags
+## Overview: permutations and zigzags
 
 Consider a path *(X<sub>0</sub>,Y<sub>0</sub>),...,(X<sub>k</sub>,Y<sub>k</sub>)*, where by construction we have *X<sub>0</sub> ≤ ··· ≤ X<sub>k</sub>*. Let *Y<sub>i</sub> = √h U<sub>i</sub>*, where *U<sub>i</sub>* is uniform on the interval [0,1]. The difference between consecutive *x*-coordinates, *X<sub>i+1</sub> − X<sub>i</sub>*, follows a scaled exponential distribution as *n → ∞*.
 
@@ -34,7 +35,7 @@ The central idea to our improved upper bound is the replacement of the horizonta
 | -------- |
 | ![](images/six_permutation.png) |
 
-### Construction of decision tree
+## Construction of decision tree
 
 To construct a decision tree, run the command:
 ```bash
@@ -68,7 +69,7 @@ Figure 5 shows how the guaranteed upper bound of *β<sub>2</sub>* improves as th
 
 The selection of *h* would also affect *β<sub>2</sub>*. Under our current computational limit, *h = √3.25* gives us a better upper bound than *h = √3, √3.5*.
 
-### List of Functions in *helper.py*
+## List of Functions in *helper.py*
 
 * Fu_4, Fuv_4, Fxuv_4, Fxyuv_4, x4: Calculate integrals for the first *k-1* summands using antiderivative (*k = 4*)
 
@@ -131,7 +132,7 @@ The selection of *h* would also affect *β<sub>2</sub>*. Under our current compu
     * Input variable: *leaf*
     * Output: nonnegative amount of contribution to the overall upper bound
 
-### List of Functions in *main.py*
+## List of Functions in *main.py*
 
 * generate_data: Generate data frame with *n_sample* rows and 11 columns
     * 10 feature columns: *x<sub>0</sub>, ..., x<sub>4</sub>, u<sub>0</sub>, ..., u<sub>4</sub>*, considering the 5-point / 6-permutation scenario
