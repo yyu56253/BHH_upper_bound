@@ -1,0 +1,8 @@
+==========================================
+SLURM_JOB_ID = 18683571
+SLURM_JOB_NODELIST = b05-18
+TMPDIR = /tmp/SLURM_18683571
+==========================================
+Time to build tree (sec): 61.29
+Time to calculate saving (sec): 21.70
+Total saving in interval arithmetic: [0.0030313176473431503906, 0.0030313176473442601799]
