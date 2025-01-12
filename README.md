@@ -1,6 +1,24 @@
-# A New Upper Bound of the Euclidean TSP Constant
+# A New Upper Bound for the Euclidean TSP Constant
 
-This paper presents a computer-aided proof of a novel approach to construct a new upper bound of the Euclidean TSP Constant, using numerical methods and decision trees. Although our improvement is still somewhat small, our approach has the advantage that it is primarily limited by computer hardware, and is thus amenable to further improvements over time.
+**Authors**: Julien Yu, John Carlsson
+**Contact**: yyu56253@usc.edu, jcarlsso@usc.edu
+
+## Description
+
+This paper presents a computer-aided proof of a novel approach to constructing a new upper bound for the Euclidean Traveling Salesman Problem (TSP) Constant, leveraging numerical methods and decision trees. While the improvement achieved is modest, the approach offers a key advantage: it is primarily constrained by computer hardware, making it highly amenable to further optimization and advancements over time.
+
+This repository contains the implementation used to compute these upper bounds through advanced numerical methods and algorithms. The project is designed for efficiency, utilizing interval arithmetic (mpmath.iv) and other mathematical libraries. Key functionalities include calculations for leaf contributions.
+
+## License
+
+This project is licensed under the Apache License, Version 2.0. See the LICENSE file or visit the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) for details.
+
+## Requirements
+
+Install the dependencies using the provided `requirements.txt` file:
+```bash
+pip install -r requirements.txt
+```
 
 ### Overview: permutations and zigzags
 
@@ -19,14 +37,16 @@ The central idea to our improved upper bound is the replacement of the horizonta
 ### Construction of decision tree
 
 To construct a decision tree, run the command:
-    
-    python3 main.py
+```bash
+python3 scripts/main.py
+```
 
 *n_sample* controls the size of the training dataset. *h* is the hyperparameter that controls the relative width of each horizontal strip. *helper.py* includes all the procedures to calculate antiderivatives and integrals and to select hyperrectangles in 10 dimensions. *main.py* calls the function *leaf_contribution* from *helper.py*, builds the decision tree, and calculates the overall improvement.
 
 To load an example decision tree, run the command:
-
-    python3 load_tree.py
+```bash
+python3 scripts/load_tree.py
+```
 
 | Figure 3: Illustration of a hyperrectangle in the 5-point / 6-permutation scenario |
 | -------- |
